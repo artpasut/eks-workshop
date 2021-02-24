@@ -9,6 +9,7 @@ sudo chmod +x /usr/local/bin/kubectl
 
 ## Update awscli
 echo '------ update aws cli -------'
+cd ~/environment
 sudo mv /usr/bin/aws /usr/local/bin/
 echo 'export PATH=$PATH:$HOME/local/bin' >>~/.bash_profile
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
