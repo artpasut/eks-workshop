@@ -9,7 +9,11 @@ sudo chmod +x /usr/local/bin/kubectl
 
 ## Update awscli
 echo '------ update aws cli -------'
-sudo pip install --upgrade awscli && hash -r
+sudo mv /usr/bin/aws /usr/local/bin/
+echo 'export PATH=$PATH:$HOME/local/bin' >>~/.bash_profile
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
 
 ## Install jq. envsubst and bash-completition
 echo '------ install jq -------'
