@@ -34,29 +34,29 @@ kubectl completion bash >>~/.bash_completion
 
 ## Ensure no temporary credentials
 
-rm -vf ${HOME}/.aws/credentials
+# rm -vf ${HOME}/.aws/credentials
 
-## configure aws region as default
+# ## configure aws region as default
 
-export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
-export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
-export AZS=($(aws ec2 describe-availability-zones --query 'AvailabilityZones[].ZoneName' --output text --region ap-southeast-1))
+# export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
+# export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
+# export AZS=($(aws ec2 describe-availability-zones --query 'AvailabilityZones[].ZoneName' --output text --region ap-southeast-1))
 
-## Check Region
+# ## Check Region
 
-test -n "$AWS_REGION" && echo AWS_REGION is "$AWS_REGION" || echo AWS_REGION is not set
+# test -n "$AWS_REGION" && echo AWS_REGION is "$AWS_REGION" || echo AWS_REGION is not set
 
-## Save to bash_profile
+# ## Save to bash_profile
 
-echo "export ACCOUNT_ID=${ACCOUNT_ID}" | tee -a ~/.bash_profile
-echo "export AWS_REGION=${AWS_REGION}" | tee -a ~/.bash_profile
-echo "export AZS=(${AZS[@]})" | tee -a ~/.bash_profile
-aws configure set default.region ${AWS_REGION}
-aws configure get default.region
+# echo "export ACCOUNT_ID=${ACCOUNT_ID}" | tee -a ~/.bash_profile
+# echo "export AWS_REGION=${AWS_REGION}" | tee -a ~/.bash_profile
+# echo "export AZS=(${AZS[@]})" | tee -a ~/.bash_profile
+# aws configure set default.region ${AWS_REGION}
+# aws configure get default.region
 
-## Validate the IAM role
-echo '------ validate iam role -------'
-aws sts get-caller-identity --query Arn | grep eksworkshop-admin -q && echo "IAM role valid" || echo "IAM role NOT valid"
+# ## Validate the IAM role
+# echo '------ validate iam role -------'
+# aws sts get-caller-identity --query Arn | grep eksworkshop-admin -q && echo "IAM role valid" || echo "IAM role NOT valid"
 
 ## Gen key to account (enter 3 times to finised)
 
@@ -79,16 +79,16 @@ aws sts get-caller-identity --query Arn | grep eksworkshop-admin -q && echo "IAM
 # echo "export MASTER_ARN=${MASTER_ARN}" | tee -a ~/.bash_profile
 
 ## Install eksctl
-echo '------ install eksctl -------'
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+# echo '------ install eksctl -------'
+# curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 
-sudo mv -v /tmp/eksctl /usr/local/bin
+# sudo mv -v /tmp/eksctl /usr/local/bin
 
-## Enable bash-completion
+# ## Enable bash-completion
 
-eksctl completion bash >>~/.bash_completion
-. /etc/profile.d/bash_completion.sh
-. ~/.bash_completion
+# eksctl completion bash >>~/.bash_completion
+# . /etc/profile.d/bash_completion.sh
+# . ~/.bash_completion
 
 ## Install Istio CLI
 echo '------ install istio cli -------'
